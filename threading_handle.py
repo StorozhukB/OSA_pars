@@ -24,8 +24,6 @@ def teacher(db,teacher:list,fq:str,mask:dict):
     r=handler.get_results(db,fq,teacher[0])
     if debug:
         rt="name:"+teacher[1]+"|id:"+str(teacher[0])+"\n"
-        file=open("res_raw.txt","w",encoding="utf-8")
-        file.close()
         for i in r:
             if r !=[]:
                 rt+=str(i[0])+"|"+str(i[1])+"\n"
@@ -62,6 +60,8 @@ def mainhandler():
         fq_list=handler.get_faculty_list(db)
         mask=handler.get_answer_mask(db)
         if debug:
+            file=open("res_raw.txt","w",encoding="utf-8")
+            file.close()
             faculty(db,"fbme",mask)
         else:
             for i in fq_list:

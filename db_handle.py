@@ -64,4 +64,3 @@ def get_results(db,faculty,teacher_id):
             AND {faculty}.teachers.id={teacher_id} \
             AND {faculty}.votes.results::jsonb ? '';" 
     return cursor(db,SQL)
-
