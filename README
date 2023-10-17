@@ -1,0 +1,6 @@
+Structure of .env file requiered to run this application:
+HOST='host ip of PostGreSQL database'
+PORT=5432 #default port, change only if needed
+DB_NAME='Name of database'
+USER='user registred in database'
+PASS='password of database user'
