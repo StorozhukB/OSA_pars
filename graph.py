@@ -10,7 +10,9 @@ from matplotlib.transforms import Affine2D
 
 from config import radar_l,radar_p,max_mark,y_hist
 
+
 mpl.use('agg')
+
 
 def radar_factory(num_vars, frame='circle'):
     """Create a radar chart with `num_vars` axes.
@@ -98,34 +100,38 @@ def radar_factory(num_vars, frame='circle'):
     register_projection(RadarAxes)
     return theta
 
-def create_radar(type:str,data:list,path:str,color:tuple=(0,0,1)):
+
+def create_radar(type:str, data:list, path:str, color:tuple=(0,0,1)):
     """
     Creae radar graph of given type:"l"/"p"(lector/practice)
     using given data list
     creates image .png in given path (path include name of file without .png)
     you may change color of data using color param
     """
-    sign=''
-    if type=="l":
-        sign=radar_l
-    elif type=="p":
+    sign = ''
+    if type == "l":
+        sign = radar_l
+    elif type == "p":
         sign=radar_p
     if not sign:
         raise ValueError("Incorect type, use l/p to choose type of graph")
     n=len(sign)
-    theta=radar_factory(n,frame='polygon')
+
+    theta = radar_factory(n,frame='polygon')
+
     fig, ax = plt.subplots(figsize=(7, 6), subplot_kw=dict(projection='radar'))
-    fig.subplots_adjust(right=0.9,top=0.85, bottom=0.15)
-    ax.set_rgrids([1,2,3,4,5],["","","","",""])
+    fig.subplots_adjust(right=0.9, top=0.85, bottom=0.15)
+    ax.set_rgrids([1,2,3,4,5], ["","","","",""])
     plt.ylim(0, 5)
     line = ax.plot(theta, data,color=color)
-    ax.fill(theta, data, alpha=0.25, label='_nolegend_',color=color)
+    ax.fill(theta, data, alpha=0.25, label='_nolegend_', color=color)
     ax.set_varlabels(['']*n)
     ax.set_varlabels(sign)
-    fig.savefig(path,transparent=True)
+    fig.savefig(path, transparent=True)
     plt.close()
 
-def create_hist(data:list,path:str,color:tuple=(0,0,1),hist_name:str=""):
+
+def create_hist(data:list, path:str, color:tuple=(0,0,1), hist_name:str=""):
     """
     Cheate histogram out of given data list
     creates image .png in given path (path include name of file without .png)
@@ -133,18 +139,17 @@ def create_hist(data:list,path:str,color:tuple=(0,0,1),hist_name:str=""):
     also name of histogram may be set by name param
     """
     plt.figure(figsize=(7,6))
-    plt.bar([i+1 for i in range(max_mark)],data,color=color)
+    plt.bar([i+1 for i in range(max_mark)], data, color=color)
     plt.grid(alpha=0.25)
     fig=plt.gcf()
     plt.xlabel(hist_name)
 
     plt.ylabel(y_hist)
     plt.gca().yaxis.label.set(rotation='horizontal', ha='right');
-    fig.axes[0].yaxis.set_label_coords(0,1.02)
+    fig.axes[0].yaxis.set_label_coords(0, 1.02)
 
     fig.savefig(path,transparent=True)
     plt.close()
-    pass
 
 
 

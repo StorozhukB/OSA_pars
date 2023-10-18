@@ -1,5 +1,7 @@
-from threading_handle import mainhandler
 import time
+
+from threading_handle import mainhandler
+
 
 def main():
     """
@@ -8,7 +10,7 @@ def main():
     """
     start=time.time()
     mainhandler()
-    print("[INFO] Program runs ",time.time()-start," s")
+    print("[INFO] Program runs ", time.time()-start, " s")
     pass
 
 if __name__=="__main__":
